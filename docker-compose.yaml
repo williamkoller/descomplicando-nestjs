@@ -6,11 +6,10 @@ services:
       dockerfile: Dockerfile
     container_name: descomplicando-nestjs
     restart: always
-    entrypoint: sh -c "yarn install && yarn start:dev"
+    entrypoint: sh -c "yarn && yarn start:dev"
     environment:
       NGINX_PORT: ${NGINX_PORT}
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_HOST: descomplicando-nestjs-db
     networks:
       - app_network
     volumes:
