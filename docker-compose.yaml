@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+  descomplicando-nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: descomplicando-nestjs
+    restart: always
+    entrypoint: sh -c "yarn install && yarn start:dev"
+    environment:
+      NGINX_PORT: ${NGINX_PORT}
+    networks:
+      - app_network
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    depends_on:
+      - postgres
+    ports:
+      - ${PORT}:${PORT}
+
+  postgres:
+    image: postgres:13.3-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - descomplicando-nestjs-db:/var/lib/postgresql/data
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - ${NGINX_PORT}:${NGINX_PORT}
+    expose:
+      - ${NGINX_PORT}
+    networks:
+      - app_network
+    links:
+      - descomplicando-nestjs
+
+volumes:
+  descomplicando-nestjs-db:
+
+networks:
+  app_network:
