@@ -1,4 +1,3 @@
-import { UserEntity } from '@/infra/typeorm/entities';
 import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AddUserDto } from '@/modules/users/dtos/add-user/add-user.dto';
@@ -23,7 +22,7 @@ export class UsersController {
     status: HttpStatus.CREATED,
     description: 'Add new User.',
   })
-  async add(@Body() data: AddUserDto): Promise<UserEntity> {
+  async add(@Body() data: AddUserDto): Promise<UserType> {
     return await this.addUserService.execute(data);
   }
 

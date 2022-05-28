@@ -1,3 +1,4 @@
+import { BcryptAdapter } from '@/infra/cryptography/bcrypt-adapter/bcrypt-adapter';
 import { UserEntity } from '@/infra/typeorm/entities';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersController } from './controllers/users.controller';
@@ -9,6 +10,6 @@ export const imports = [
   TypeOrmModule.forFeature([UserEntity, UsersRepository]),
 ];
 
-export const providers = [AddUserService, FindUserByIdService];
+export const providers = [AddUserService, FindUserByIdService, BcryptAdapter];
 
 export const controllers = [UsersController];
