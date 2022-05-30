@@ -1,5 +1,5 @@
 import { UserEntity } from '@/infra/typeorm/entities';
-import { userTransform } from './user';
+import { usersTransform, userTransform } from './user';
 
 const makeUser = (): UserEntity => {
   return {
@@ -26,5 +26,20 @@ describe('User Transform', () => {
     expect(actual.password).toBe(user.password);
     expect(actual.createdAt).toBe(user.createdAt);
     expect(actual.updatedAt).toBe(user.updatedAt);
+  });
+
+  it('should transform users to output', () => {
+    const users: UserEntity[] = [makeUser()];
+
+    const actual = usersTransform(users);
+
+    expect(actual.length).toBe(1);
+    expect(actual[0].id).toBe(users[0].id);
+    expect(actual[0].name).toBe(users[0].name);
+    expect(actual[0].surname).toBe(users[0].surname);
+    expect(actual[0].email).toBe(users[0].email);
+    expect(actual[0].password).toBe(users[0].password);
+    expect(actual[0].createdAt).toBe(users[0].createdAt);
+    expect(actual[0].updatedAt).toBe(users[0].updatedAt);
   });
 });
