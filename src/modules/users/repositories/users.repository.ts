@@ -3,6 +3,7 @@ import {
   FindUserByNameRepository,
   FindUserByEmailRepository,
   FindUserByIdRepository,
+  FindUsersRepository,
 } from '@/data/protocols/db/users';
 import { UserEntity } from '@/infra/typeorm/entities';
 import { EntityRepository, Repository } from 'typeorm';
@@ -15,7 +16,8 @@ export class UsersRepository
     AddUserRepository,
     FindUserByNameRepository,
     FindUserByEmailRepository,
-    FindUserByIdRepository
+    FindUserByIdRepository,
+    FindUsersRepository
 {
   async add(data: AddUserDto): Promise<UserEntity> {
     const userCreated = Object.assign({} as AddUserDto, data);
@@ -34,5 +36,9 @@ export class UsersRepository
 
   async findUserById(id: string): Promise<UserEntity> {
     return await this.findOne({ id });
+  }
+
+  async findAll(): Promise<UserEntity[]> {
+    return await this.find();
   }
 }
