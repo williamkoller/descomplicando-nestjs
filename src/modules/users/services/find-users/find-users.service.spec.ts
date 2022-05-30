@@ -6,7 +6,7 @@ import { UserEntity } from '@/infra/typeorm/entities';
 describe('FindUsersService', () => {
   let findUsersService: FindUsersService;
   let usersRepo: UsersRepository;
-  let mockData;
+  let mockData: UserEntity[];
 
   beforeEach(async () => {
     const usersRepositoryMock = {
@@ -34,7 +34,7 @@ describe('FindUsersService', () => {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-    ] as UserEntity[];
+    ];
   });
 
   it('should be defined', () => {
