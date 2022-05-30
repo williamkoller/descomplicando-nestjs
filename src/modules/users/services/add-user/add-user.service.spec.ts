@@ -50,11 +50,11 @@ describe('AddUserService', () => {
   });
 
   it('should be throw if user not found', async () => {
-    (usersRepo.add as jest.Mock).mockRejectedValue(
+    (usersRepo.findUserByEmail as jest.Mock).mockRejectedValue(
       new ConflictException('This email is already in use.'),
     );
 
-    mockData.email = 'invalid@mail.com';
+    mockData.email = 'valid@mail.com';
     await expect(addUserService.execute(mockData)).rejects.toThrow(
       new ConflictException('This email is already in use.'),
     );
