@@ -11,7 +11,7 @@ services:
       NGINX_PORT: ${NGINX_PORT}
       POSTGRES_HOST: descomplicando-nestjs-db
     networks:
-      - app_network
+      - descomplicando-nestjs-network
     volumes:
       - .:/app/
       - /app/node_modules
@@ -34,7 +34,7 @@ services:
     volumes:
       - descomplicando-nestjs-data:/var/lib/postgresql/data
     networks:
-      - app_network
+      - descomplicando-nestjs-network
 
   nginx:
     build:
@@ -47,7 +47,7 @@ services:
     expose:
       - ${NGINX_PORT}
     networks:
-      - app_network
+      - descomplicando-nestjs-network
     links:
       - descomplicando-nestjs
 
@@ -55,4 +55,4 @@ volumes:
   descomplicando-nestjs-data:
 
 networks:
-  app_network:
+  descomplicando-nestjs-network:
