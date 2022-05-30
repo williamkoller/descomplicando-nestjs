@@ -4,10 +4,13 @@ import {
   FindUserByEmailRepository,
   FindUserByIdRepository,
   FindUsersRepository,
+  DeleteUserRepository,
+  UpdateUserRepository,
 } from '@/data/protocols/db/users';
 import { UserEntity } from '@/infra/typeorm/entities';
 import { EntityRepository, Repository } from 'typeorm';
 import { AddUserDto } from '../dtos/add-user/add-user.dto';
+import { UpdateUserDto } from '../dtos/update-user/update-user.dto';
 
 @EntityRepository(UserEntity)
 export class UsersRepository
@@ -17,7 +20,9 @@ export class UsersRepository
     FindUserByNameRepository,
     FindUserByEmailRepository,
     FindUserByIdRepository,
-    FindUsersRepository
+    FindUsersRepository,
+    DeleteUserRepository,
+    UpdateUserRepository
 {
   async add(data: AddUserDto): Promise<UserEntity> {
     const userCreated = Object.assign({} as AddUserDto, data);
@@ -42,5 +47,17 @@ export class UsersRepository
 
   async findAll(): Promise<UserEntity[]> {
     return await this.find();
+  }
+
+  async deleteUser(id: string): Promise<void> {
+    await this.delete(id);
+  }
+
+  async updateUser(
+    user: UserEntity,
+    updateUserDto: UpdateUserDto,
+  ): Promise<UserEntity> {
+    const userUpdated = this.merge(user, { ...updateUserDto });
+    return await this.save(userUpdated);
   }
 }
