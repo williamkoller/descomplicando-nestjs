@@ -3,14 +3,17 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AddUserDto } from '@/modules/users/dtos/add-user/add-user.dto';
 import { AddUserService } from '@/modules/users/services/add-user/add-user.service';
 import { FindUserByIdService } from '@/modules/users/services/find-user-by-id/find-user-by-id.service';
-import { UserType } from '../types/user.type';
+import { UserType } from '@/modules/users/types/user.type';
+import { FindUsersService } from '@/modules/users/services/find-users/find-users.service';
+import { UserEntity } from '@/infra/typeorm/entities';
 
-@Controller('users')
 @ApiTags('users')
+@Controller('users')
 export class UsersController {
   constructor(
     private readonly addUserService: AddUserService,
     private readonly findUserByIdService: FindUserByIdService,
+    private readonly findUsersService: FindUsersService,
   ) {}
 
   @Post('sign-up')
@@ -37,5 +40,10 @@ export class UsersController {
   })
   async findById(@Param('id') id: string): Promise<UserType> {
     return await this.findUserByIdService.execute(id);
+  }
+
+  @Get()
+  async find(): Promise<UserEntity[]> {
+    return await this.findUsersService.execute();
   }
 }

@@ -11,9 +11,9 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
-  swaggerConfig(app);
-
   app.setGlobalPrefix('api/v1');
+
+  swaggerConfig(app);
 
   const config = app.get<ConfigService>(ConfigService);
   const port = config.get<string>('port');
