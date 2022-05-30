@@ -3,6 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersRepository } from '@/modules/users/repositories/users.repository';
 import { BcryptAdapter } from '@/infra/cryptography/bcrypt-adapter/bcrypt-adapter';
 import { UserEntity } from '@/infra/typeorm/entities';
+import { ConflictException } from '@nestjs/common';
 
 describe('AddUserService', () => {
   let addUserService: AddUserService;
@@ -46,5 +47,16 @@ describe('AddUserService', () => {
     (usersRepo.add as jest.Mock).mockReturnValue(mockData);
 
     expect(await addUserService.execute(mockData)).toEqual(mockData);
+  });
+
+  it('should be throw if user not found', async () => {
+    (usersRepo.add as jest.Mock).mockRejectedValue(
+      new ConflictException('This email is already in use.'),
+    );
+
+    mockData.email = 'invalid@mail.com';
+    await expect(addUserService.execute(mockData)).rejects.toThrow(
+      new ConflictException('This email is already in use.'),
+    );
   });
 });
