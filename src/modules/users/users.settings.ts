@@ -6,6 +6,7 @@ import { UsersRepository } from './repositories/users.repository';
 import { AddUserService } from './services/add-user/add-user.service';
 import { FindUserByIdService } from './services/find-user-by-id/find-user-by-id.service';
 import { FindUsersService } from './services/find-users/find-users.service';
+import { FindUserByEmailService } from './services/find-user-by-email/find-user-by-email.service';
 
 export const imports = [
   TypeOrmModule.forFeature([UserEntity, UsersRepository]),
@@ -16,6 +17,7 @@ export const providers = [
   FindUserByIdService,
   BcryptAdapter,
   FindUsersService,
+  FindUserByEmailService,
 ];
 
 export const controllers = [UsersController];

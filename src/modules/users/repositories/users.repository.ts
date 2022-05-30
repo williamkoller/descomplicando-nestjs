@@ -31,7 +31,9 @@ export class UsersRepository
   }
 
   async findUserByEmail(email: string): Promise<UserEntity> {
-    return await this.findOne({ email });
+    return await this.createQueryBuilder('users')
+      .where(`(users.email) = email`, { email })
+      .getOne();
   }
 
   async findUserById(id: string): Promise<UserEntity> {
