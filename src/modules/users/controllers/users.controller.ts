@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AddUserDto } from '@/modules/users/dtos/add-user/add-user.dto';
@@ -20,6 +21,7 @@ import { FindUserByEmailService } from '@/modules/users/services/find-user-by-em
 import { UpdateUserDto } from '@/modules/users/dtos/update-user/update-user.dto';
 import { UpdateUserService } from '@/modules/users/services/update-user/update-user.service';
 import { DeleteUserService } from '@/modules/users/services/delete-user/delete-user.service';
+import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
 
 @ApiTags('users')
 @Controller('users')
@@ -48,6 +50,7 @@ export class UsersController {
   }
 
   @Get(':id/find-user-by-id')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
@@ -62,6 +65,7 @@ export class UsersController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
@@ -76,6 +80,7 @@ export class UsersController {
   }
 
   @Get(':email/find-user-by-email')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
@@ -90,6 +95,7 @@ export class UsersController {
   }
 
   @Put(':id/update')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
@@ -107,6 +113,7 @@ export class UsersController {
   }
 
   @Delete(':id/delete')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
