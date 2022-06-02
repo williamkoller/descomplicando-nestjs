@@ -1,4 +1,14 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AddUserDto } from '@/modules/users/dtos/add-user/add-user.dto';
 import { AddUserService } from '@/modules/users/services/add-user/add-user.service';
@@ -7,6 +17,9 @@ import { UserType } from '@/modules/users/types/user.type';
 import { FindUsersService } from '@/modules/users/services/find-users/find-users.service';
 import { UserEntity } from '@/infra/typeorm/entities';
 import { FindUserByEmailService } from '@/modules/users/services/find-user-by-email/find-user-by-email.service';
+import { UpdateUserDto } from '@/modules/users/dtos/update-user/update-user.dto';
+import { UpdateUserService } from '@/modules/users/services/update-user/update-user.service';
+import { DeleteUserService } from '@/modules/users/services/delete-user/delete-user.service';
 
 @ApiTags('users')
 @Controller('users')
@@ -16,9 +29,12 @@ export class UsersController {
     private readonly findUserByIdService: FindUserByIdService,
     private readonly findUsersService: FindUsersService,
     private readonly findUserByEmailService: FindUserByEmailService,
+    private readonly updatUserService: UpdateUserService,
+    private readonly deleteUserService: DeleteUserService,
   ) {}
 
-  @Post('sign-up')
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
   @ApiResponse({
     status: HttpStatus.CONFLICT,
     description: 'This email is already in use.',
@@ -31,7 +47,8 @@ export class UsersController {
     return await this.addUserService.execute(data);
   }
 
-  @Get('find-user-by-id/:id')
+  @Get(':id/find-user-by-id')
+  @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'User not found.',
@@ -45,6 +62,7 @@ export class UsersController {
   }
 
   @Get()
+  @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'No record found.',
@@ -57,7 +75,8 @@ export class UsersController {
     return await this.findUsersService.execute();
   }
 
-  @Get('find-user-by-email')
+  @Get(':email/find-user-by-email')
+  @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'User not found.',
@@ -66,7 +85,38 @@ export class UsersController {
     status: HttpStatus.OK,
     description: 'Find user by email.',
   })
-  async findByEmail(@Body() email: string): Promise<UserType> {
+  async findByEmail(@Param('email') email: string): Promise<UserType> {
     return await this.findUserByEmailService.execute(email);
+  }
+
+  @Put(':id/update')
+  @HttpCode(HttpStatus.OK)
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'User not found.',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Update user.',
+  })
+  async updateUser(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<UserEntity> {
+    return await this.updatUserService.execute(id, updateUserDto);
+  }
+
+  @Delete(':id/delete')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'User not found.',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Delete user.',
+  })
+  async deleteUser(@Param('id') id: string): Promise<void> {
+    return await this.deleteUserService.execute(id);
   }
 }
