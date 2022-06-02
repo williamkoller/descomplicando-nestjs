@@ -22,6 +22,7 @@ import { UpdateUserDto } from '@/modules/users/dtos/update-user/update-user.dto'
 import { UpdateUserService } from '@/modules/users/services/update-user/update-user.service';
 import { DeleteUserService } from '@/modules/users/services/delete-user/delete-user.service';
 import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
+import { ValidationParamsPipe } from '@/common/pipes/validation-params.pipe';
 
 @ApiTags('users')
 @Controller('users')
@@ -60,7 +61,7 @@ export class UsersController {
     status: HttpStatus.OK,
     description: 'Find user by id.',
   })
-  async findById(@Param('id') id: string): Promise<UserType> {
+  async findById(@Param(ValidationParamsPipe) id: string): Promise<UserType> {
     return await this.findUserByIdService.execute(id);
   }
 
@@ -90,7 +91,9 @@ export class UsersController {
     status: HttpStatus.OK,
     description: 'Find user by email.',
   })
-  async findByEmail(@Param('email') email: string): Promise<UserType> {
+  async findByEmail(
+    @Param(ValidationParamsPipe) email: string,
+  ): Promise<UserType> {
     return await this.findUserByEmailService.execute(email);
   }
 
@@ -106,7 +109,7 @@ export class UsersController {
     description: 'Update user.',
   })
   async updateUser(
-    @Param('id') id: string,
+    @Param(ValidationParamsPipe) id: string,
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<UserEntity> {
     return await this.updatUserService.execute(id, updateUserDto);
@@ -123,7 +126,7 @@ export class UsersController {
     status: HttpStatus.OK,
     description: 'Delete user.',
   })
-  async deleteUser(@Param('id') id: string): Promise<void> {
+  async deleteUser(@Param(ValidationParamsPipe) id: string): Promise<void> {
     return await this.deleteUserService.execute(id);
   }
 }
