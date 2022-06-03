@@ -1,3 +1,5 @@
+[![CodeQL](https://github.com/williamkoller/descomplicando-nestjs/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/williamkoller/descomplicando-nestjs/actions/workflows/codeql.yml)
+
 # Descomplicando Nestjs
 
 - Requerido `docker` e `docker-compose`
