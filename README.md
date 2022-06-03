@@ -1,6 +1,7 @@
 [![CodeQL](https://github.com/williamkoller/descomplicando-nestjs/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/williamkoller/descomplicando-nestjs/actions/workflows/codeql.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/74f9acc450a146bea6c3e23d63c4bd62)](https://www.codacy.com/gh/williamkoller/descomplicando-nestjs/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=williamkoller/descomplicando-nestjs&amp;utm_campaign=Badge_Grade)
 ![descomplicando-nestjs Actions](https://api.meercode.io/badge/williamkoller/descomplicando-nestjs?type=ci-score&lastDay=14)
+[![CodeFactor](https://www.codefactor.io/repository/github/williamkoller/descomplicando-nestjs/badge)](https://www.codefactor.io/repository/github/williamkoller/descomplicando-nestjs)
 
 # Descomplicando Nestjs
 
