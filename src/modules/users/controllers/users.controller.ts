@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -23,6 +24,9 @@ import { UpdateUserService } from '@/modules/users/services/update-user/update-u
 import { DeleteUserService } from '@/modules/users/services/delete-user/delete-user.service';
 import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
 import { ValidationParamsPipe } from '@/common/pipes/validation-params.pipe';
+import { FilterUserDto } from '@/modules/users/dtos/filter-user/filter-user.dto';
+import { ResultWithPagination } from '@/shared/pagination/interfaces/result-with-pagination.interface';
+import { FindUsersWithPaginationService } from '@/modules/users/services/find-users-with-pagination/find-users-with-pagination.service';
 
 @ApiTags('users')
 @Controller('users')
@@ -34,6 +38,7 @@ export class UsersController {
     private readonly findUserByEmailService: FindUserByEmailService,
     private readonly updatUserService: UpdateUserService,
     private readonly deleteUserService: DeleteUserService,
+    private readonly findUserWithPagination: FindUsersWithPaginationService,
   ) {}
 
   @Post()
@@ -128,5 +133,22 @@ export class UsersController {
   })
   async deleteUser(@Param(ValidationParamsPipe) id: string): Promise<void> {
     return await this.deleteUserService.execute(id);
+  }
+
+  @Get('find-users-with-pagination')
+  @UseGuards(JwtAuthGuard)
+  @HttpCode(HttpStatus.OK)
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'No record found.',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Find users.',
+  })
+  async findUserWithPAgination(
+    @Query(ValidationParamsPipe) data: FilterUserDto,
+  ): Promise<ResultWithPagination<UserEntity[]>> {
+    return await this.findUserWithPagination.findPagination(data);
   }
 }

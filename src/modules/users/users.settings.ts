@@ -9,6 +9,9 @@ import { FindUsersService } from './services/find-users/find-users.service';
 import { FindUserByEmailService } from './services/find-user-by-email/find-user-by-email.service';
 import { UpdateUserService } from './services/update-user/update-user.service';
 import { DeleteUserService } from './services/delete-user/delete-user.service';
+import { FindUsersWithPaginationService } from './services/find-users-with-pagination/find-users-with-pagination.service';
+import { CalculateOffsetService } from '@/shared/pagination/services/calculate-offset/calculate-offset.service';
+import { BuildPaginationService } from '@/shared/pagination/services/build-pagination/build-pagination.service';
 
 export const imports = [
   TypeOrmModule.forFeature([UserEntity, UsersRepository]),
@@ -22,6 +25,9 @@ export const providers = [
   FindUserByEmailService,
   UpdateUserService,
   DeleteUserService,
+  FindUsersWithPaginationService,
+  CalculateOffsetService,
+  BuildPaginationService,
 ];
 
 export const controllers = [UsersController];

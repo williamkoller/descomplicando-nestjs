@@ -58,4 +58,11 @@ export class UsersRepository
     const userUpdated = this.merge(user, { ...updateUserDto });
     return await this.save(userUpdated);
   }
+
+  async findUserAndCount(
+    offset: number,
+    limit: number,
+  ): Promise<[UserEntity[], number]> {
+    return await this.findAndCount({ skip: offset, take: limit });
+  }
 }
