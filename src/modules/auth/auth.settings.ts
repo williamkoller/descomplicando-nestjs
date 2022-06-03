@@ -7,6 +7,8 @@ import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersRepository } from '../users/repositories/users.repository';
 import { FindUserByEmailService } from '../users/services/find-user-by-email/find-user-by-email.service';
+import { FindUserByIdService } from '../users/services/find-user-by-id/find-user-by-id.service';
+import { FindUserProfileService } from '../users/services/find-user-profile/find-user-profile.service';
 import { AuthController } from './controllers/auth.controller';
 import { AuthService } from './services/auth.service';
 import { JwtStrategy } from './strategy/jwt.strategy';
@@ -40,5 +42,7 @@ export const providers = [
   JwtAdapter,
   BcryptAdapter,
   FindUserByEmailService,
+  FindUserProfileService,
+  FindUserByIdService,
 ];
 export const controllers = [AuthController];
