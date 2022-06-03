@@ -24,9 +24,6 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
-      
-      - name: Run migrations
-        run: yarn typeorm:migration:run
 
   continuos-delivery:
     runs-on: ubuntu-latest
