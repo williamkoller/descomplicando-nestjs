@@ -29,10 +29,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
     );
 
     response.status(status).json({
-      method: request.method,
-      path: request.url,
-      timestamp: new Date().toISOString(),
-      details: message,
+      error: {
+        timestamp: new Date().toISOString(),
+        path: request.url,
+        method: request.method,
+        message,
+      },
     });
   }
 }
