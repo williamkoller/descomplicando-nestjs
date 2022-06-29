@@ -12,9 +12,10 @@ import { DeleteUserService } from './services/delete-user/delete-user.service';
 import { FindUsersWithPaginationService } from './services/find-users-with-pagination/find-users-with-pagination.service';
 import { CalculateOffsetService } from '@/shared/pagination/services/calculate-offset/calculate-offset.service';
 import { BuildPaginationService } from '@/shared/pagination/services/build-pagination/build-pagination.service';
+import { RoleEntity } from '@/infra/typeorm/entities/role-entity/role-entity';
 
 export const imports = [
-  TypeOrmModule.forFeature([UserEntity, UsersRepository]),
+  TypeOrmModule.forFeature([UserEntity, UsersRepository, RoleEntity]),
 ];
 
 export const providers = [

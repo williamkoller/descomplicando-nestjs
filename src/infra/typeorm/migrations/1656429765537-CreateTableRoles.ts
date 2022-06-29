@@ -8,8 +8,8 @@ export class CreateTableRoles1656429765537 implements MigrationInterface {
       "description" character varying NOT NULL,
       "permissions" _text NOT NULL,
       "userId" uuid NOT NULL,
-      "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
       CONSTRAINT "users_fk" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION,
       CONSTRAINT "roles_pk"PRIMARY KEY ("id")
     );`);
