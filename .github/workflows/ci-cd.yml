@@ -1,4 +1,4 @@
-name: 'CI/CD Nodejs Application'
+name: 'CI/CD'
 
 on:
   pull_request:
