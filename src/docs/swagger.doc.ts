@@ -7,6 +7,7 @@ export const swaggerConfig = (app: NestExpressApplication): void => {
     .setDescription('Descricao da API Descomplicando Nestjs')
     .setVersion('0.0.1')
     .addTag('users')
+    .addTag('roles')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
