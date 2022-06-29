@@ -31,7 +31,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
       - name: Deploy to heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
