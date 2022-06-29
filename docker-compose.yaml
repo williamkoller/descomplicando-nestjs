@@ -9,20 +9,20 @@ services:
     entrypoint: sh -c "yarn && yarn start:dev"
     environment:
       NGINX_PORT: ${NGINX_PORT}
-      POSTGRES_HOST: descomplicando-nestjs-db
+      POSTGRES_HOST: postgres
     networks:
       - descomplicando-nestjs-network
     volumes:
       - .:/app/
       - /app/node_modules
     depends_on:
-      - descomplicando-nestjs-db
+      - postgres
     ports:
       - ${PORT}:${PORT}
 
-  descomplicando-nestjs-db:
+  postgres:
     image: postgres:13.3-alpine
-    container_name: descomplicando-nestjs-db
+    container_name: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

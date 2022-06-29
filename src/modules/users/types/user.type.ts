@@ -1,3 +1,5 @@
+import { RoleEntity } from '@/infra/typeorm/entities/role-entity/role-entity';
+
 export type UserType = {
   id: string;
   name: string;
@@ -6,4 +8,5 @@ export type UserType = {
   password: string;
   createdAt: Date;
   updatedAt: Date;
+  roles: RoleEntity[];
 };

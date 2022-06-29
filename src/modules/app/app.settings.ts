@@ -5,6 +5,7 @@ import { UsersModule } from '@/modules/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { configService } from '@/infra/typeorm/config/config.service';
 import { AuthModule } from '@/modules/auth/auth.module';
+import { RolesModule } from '@/modules/roles/roles.module';
 
 export const imports = [
   ConfigModule.forRoot({
@@ -15,4 +16,5 @@ export const imports = [
   TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
   forwardRef(() => UsersModule),
   forwardRef(() => AuthModule),
+  forwardRef(() => RolesModule),
 ];

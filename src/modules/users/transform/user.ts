@@ -10,6 +10,7 @@ export const userTransform = (user: UserEntity): UserType => {
     password: user.password,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
+    roles: user.roles.map((role) => role),
   };
 };
 
