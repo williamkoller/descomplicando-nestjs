@@ -2,8 +2,7 @@ name: 'CI/CD Nodejs Application'
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   continuous-integration:
@@ -22,7 +21,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: yarn install 
+        run: yarn install
 
   continuos-delivery:
     runs-on: ubuntu-latest
