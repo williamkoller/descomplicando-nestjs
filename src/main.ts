@@ -17,7 +17,7 @@ async function bootstrap() {
 
   app.useGlobalInterceptors(new TimeoutInterceptor(), new LoggingInterceptor());
 
-  app.setGlobalPrefix('api/v1');
+  app.setGlobalPrefix('api');
 
   swaggerConfig(app);
 

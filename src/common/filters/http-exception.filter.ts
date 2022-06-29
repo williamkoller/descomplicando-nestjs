@@ -8,9 +8,9 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 
-@Catch()
+@Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
-  constructor(private readonly logger = new Logger(HttpExceptionFilter.name)) {}
+  private logger = new Logger(HttpExceptionFilter.name);
   catch(exception: HttpException, host: ArgumentsHost): void {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -29,10 +29,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
     );
 
     response.status(status).json({
-      method: request.method,
-      path: request.url,
-      details: message,
-      timestamp: new Date().toISOString(),
+      error: {
+        timestamp: new Date().toISOString(),
+        path: request.url,
+        method: request.method,
+        message,
+      },
     });
   }
 }
