@@ -48,6 +48,7 @@ class ConfigService {
       retryDelay: 3000,
       keepConnectionAlive: true,
       connectTimeoutMS: 15000,
+      url: this.getEnv('POSTGRES_URI'),
     };
   }
 }
