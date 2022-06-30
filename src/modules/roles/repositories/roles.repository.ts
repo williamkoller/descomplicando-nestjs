@@ -28,9 +28,8 @@ export class RolesRepository
 
   async findRolePermissions(userId: string): Promise<string[]> {
     const { permissions: permissionsList } = await this.findOne({
-      where: userId,
+      where: { userId },
     });
-
     return permissionsList;
   }
 }

@@ -46,7 +46,7 @@ export class PermissionsGuard implements CanActivate {
       loadUserByRole.find((roles) => roles === role);
 
     const hasPermission = (): string =>
-      permissions.find((per) => per === hasRole());
+      permissions.find((permission) => permission === hasRole());
 
     if (hasPermission() && hasRole()) return true;
 

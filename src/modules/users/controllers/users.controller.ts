@@ -27,6 +27,9 @@ import { ValidationParamsPipe } from '@/common/pipes/validation-params.pipe';
 import { FilterUserDto } from '@/modules/users/dtos/filter-user/filter-user.dto';
 import { ResultWithPagination } from '@/shared/pagination/interfaces/result-with-pagination.interface';
 import { FindUsersWithPaginationService } from '@/modules/users/services/find-users-with-pagination/find-users-with-pagination.service';
+import { PermissionsGuard } from '@/modules/auth/guards/permissions.guard';
+import { Permissions } from '@/modules/auth/decorators/permissions.decorator';
+import { UserPermissions } from '@/modules/users/enum/user-permissions.enum';
 
 @ApiTags('users')
 @Controller('users')
@@ -136,7 +139,8 @@ export class UsersController {
   }
 
   @Get('find-users-with-pagination')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, PermissionsGuard)
+  @Permissions(UserPermissions.ADMIN)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
