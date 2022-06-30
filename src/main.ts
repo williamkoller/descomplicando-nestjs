@@ -26,7 +26,7 @@ async function bootstrap() {
   const nodeEnv = config.get<string>('nodeEnv');
 
   await app.listen(port, () =>
-    logger.log(`server is running in ${nodeEnv} mode`),
+    logger.log(`server is running in ${nodeEnv} mode.`),
   );
 }
 bootstrap();

@@ -1,9 +1,8 @@
-name: 'CI/CD Nodejs Application'
+name: 'CI/CD Heroku'
 
 on:
   pull_request:
-    branches:
-      - develop
+    branches: [main]
 
 jobs:
   continuous-integration:
@@ -31,12 +30,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
       - name: Deploy to heroku
-        if: ${{ github.ref == 'refs/heads/main'}}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          buildpack: 'https://github.com/zidizei/heroku-buildpack-tsc#v2.0'
+          justlogin: true
+      - run: heroku run yarn typeorm:migration:run --app ${{ secrets.HEROKU_APP_NAME }}
