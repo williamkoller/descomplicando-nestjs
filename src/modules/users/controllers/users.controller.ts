@@ -11,7 +11,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AddUserDto } from '@/modules/users/dtos/add-user/add-user.dto';
 import { AddUserService } from '@/modules/users/services/add-user/add-user.service';
 import { FindUserByIdService } from '@/modules/users/services/find-user-by-id/find-user-by-id.service';
@@ -59,6 +59,7 @@ export class UsersController {
   }
 
   @Get(':id/find-user-by-id')
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
@@ -74,6 +75,7 @@ export class UsersController {
   }
 
   @Get()
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
@@ -89,6 +91,7 @@ export class UsersController {
   }
 
   @Get(':email/find-user-by-email')
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
@@ -106,6 +109,7 @@ export class UsersController {
   }
 
   @Put(':id/update')
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
@@ -124,6 +128,7 @@ export class UsersController {
   }
 
   @Delete(':id/delete')
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiResponse({
@@ -139,6 +144,7 @@ export class UsersController {
   }
 
   @Get('find-users-with-pagination')
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, PermissionsGuard)
   @Permissions(UserPermissions.ADMIN)
   @HttpCode(HttpStatus.OK)
