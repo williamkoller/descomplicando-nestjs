@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "3a4a718e-a13c-4a2d-9a93-8ca85af2d673",
+		"name": "Descomplicando Nestjs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20656850"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"William\",\n  \"surname\": \"Koller\",\n  \"email\": \"williamkoller404@gmail.com\",\n  \"password\": \"q1w2e3r4t5y6u7\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL_LOCAL}}/users",
+							"host": [
+								"{{API_URL_LOCAL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL_LOCAL}}/users/576e571b-1278-4a3a-b46f-fc35350e6683/find-user-by-id",
+							"host": [
+								"{{API_URL_LOCAL}}"
+							],
+							"path": [
+								"users",
+								"576e571b-1278-4a3a-b46f-fc35350e6683",
+								"find-user-by-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find user by email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL_LOCAL}}/users/williamkoller404@gmail.com/find-user-by-email",
+							"host": [
+								"{{API_URL_LOCAL}}"
+							],
+							"path": [
+								"users",
+								"williamkoller404@gmail.com",
+								"find-user-by-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL_LOCAL}}/users",
+							"host": [
+								"{{API_URL_LOCAL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find users with pagination",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-role",
+								"value": "ADMIN",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL_LOCAL}}/users/find-users-with-pagination?limit=5&page=1",
+							"host": [
+								"{{API_URL_LOCAL}}"
+							],
+							"path": [
+								"users",
+								"find-users-with-pagination"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"surname\": \"Cezar Koller\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL_LOCAL}}/users/576e571b-1278-4a3a-b46f-fc35350e6683/update",
+							"host": [
+								"{{API_URL_LOCAL}}"
+							],
+							"path": [
+								"users",
+								"576e571b-1278-4a3a-b46f-fc35350e6683",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL_LOCAL}}/users/576e571b-1278-4a3a-b46f-fc35350e6683/delete",
+							"host": [
+								"{{API_URL_LOCAL}}"
+							],
+							"path": [
+								"users",
+								"576e571b-1278-4a3a-b46f-fc35350e6683",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json();",
+									"pm.environment.set('accessToken', res.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"williamkoller404@gmail.com\",\n  \"password\": \"q1w2e3r4t5y6u7\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL_LOCAL}}/auth",
+							"host": [
+								"{{API_URL_LOCAL}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL_LOCAL}}/auth/me",
+							"host": [
+								"{{API_URL_LOCAL}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Add",
+					"item": [
+						{
+							"name": "Add Role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Admin\",\n  \"description\": \"System Administrator\",\n  \"permissions\": [\n    \"ADMIN\",\n    \"SYSTEM\",\n    \"SUPER_ADMIN\",\n    \"USER\"\n  ],\n  \"userId\": \"0b4951b4-211a-4519-9950-407024d80b0b\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL_LOCAL}}/roles",
+									"host": [
+										"{{API_URL_LOCAL}}"
+									],
+									"path": [
+										"roles"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
