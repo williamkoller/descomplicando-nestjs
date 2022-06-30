@@ -12,7 +12,7 @@ import {
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthInputDto } from '@/modules/auth/dtos/auth-input/auth-input.dto';
 import { AuthService } from '@/modules/auth/services/auth.service';
-import { JwtAuthGuard } from '../guards/auth.guard';
+import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
 import { UserEntity } from '@/infra/typeorm/entities';
 import { FindUserProfileService } from '@/modules/users/services/find-user-profile/find-user-profile.service';
 import { Request } from 'express';

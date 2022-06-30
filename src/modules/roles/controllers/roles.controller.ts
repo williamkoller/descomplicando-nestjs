@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AddRoleDto } from '../dtos/add-role/add-role.dto';
-import { AddRoleService } from '../services/add-role/add-role.service';
+import { AddRoleDto } from '@/modules/roles/dtos/add-role/add-role.dto';
+import { AddRoleService } from '@/modules/roles/services/add-role/add-role.service';
 
 @ApiTags('roles')
 @Controller('roles')

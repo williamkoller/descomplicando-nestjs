@@ -2,7 +2,7 @@ import { BcryptAdapter } from '@/infra/cryptography/bcrypt-adapter/bcrypt-adapte
 import { JwtAdapter } from '@/infra/cryptography/jwt-adapter/jwt-adapter';
 import { FindUserByEmailService } from '@/modules/users/services/find-user-by-email/find-user-by-email.service';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { AuthInputDto } from '../dtos/auth-input/auth-input.dto';
+import { AuthInputDto } from '@/modules/auth/dtos/auth-input/auth-input.dto';
 
 @Injectable()
 export class AuthService {

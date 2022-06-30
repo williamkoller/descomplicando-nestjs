@@ -1,6 +1,6 @@
 import { UserEntity } from '@/infra/typeorm/entities';
 import { Injectable } from '@nestjs/common';
-import { FindUserByIdService } from '../find-user-by-id/find-user-by-id.service';
+import { FindUserByIdService } from '@/modules/users/services/find-user-by-id/find-user-by-id.service';
 
 @Injectable()
 export class FindUserProfileService {

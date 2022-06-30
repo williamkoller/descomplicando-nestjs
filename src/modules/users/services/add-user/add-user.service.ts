@@ -2,8 +2,8 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { UsersRepository } from '@/modules/users/repositories/users.repository';
 import { AddUserDto } from '@/modules/users/dtos/add-user/add-user.dto';
 import { BcryptAdapter } from '@/infra/cryptography/bcrypt-adapter/bcrypt-adapter';
-import { UserType } from '../../types/user.type';
-import { userTransform } from '../../transform/user';
+import { UserType } from '@/modules/users/types/user.type';
+import { userTransform } from '@/modules/users/transform/user';
 
 @Injectable()
 export class AddUserService {

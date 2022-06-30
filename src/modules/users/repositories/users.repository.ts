@@ -9,8 +9,8 @@ import {
 } from '@/data/protocols/db/users';
 import { UserEntity } from '@/infra/typeorm/entities';
 import { EntityRepository, Repository } from 'typeorm';
-import { AddUserDto } from '../dtos/add-user/add-user.dto';
-import { UpdateUserDto } from '../dtos/update-user/update-user.dto';
+import { AddUserDto } from '@/modules/users/dtos/add-user/add-user.dto';
+import { UpdateUserDto } from '@/modules/users/dtos/update-user/update-user.dto';
 
 @EntityRepository(UserEntity)
 export class UsersRepository
