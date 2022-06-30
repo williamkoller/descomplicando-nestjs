@@ -37,4 +37,4 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           justlogin: true
-      - run: heroku run yarn typeorm:migration:run
+      - run: heroku run yarn typeorm:migration:run --app ${{ secrets.HEROKU_APP_NAME }}
