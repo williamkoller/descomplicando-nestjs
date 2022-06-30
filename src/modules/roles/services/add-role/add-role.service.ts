@@ -14,11 +14,8 @@ export class AddRoleService {
   ) {}
 
   async addRole(data: AddRoleDto): Promise<RoleEntity> {
-    const [role] = await Promise.all([
-      this.findRoleByNameService.findByName(data.name),
-      this.findUserByIdService.execute(data.userId),
-      this.rolesRepo.add(data),
-    ]);
-    return role;
+    await this.findRoleByNameService.findByName(data.name);
+    await this.findUserByIdService.execute(data.userId);
+    return await this.rolesRepo.add(data);
   }
 }
