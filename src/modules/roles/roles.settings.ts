@@ -6,6 +6,7 @@ import { RolesController } from './controllers/roles.controller';
 import { RolesRepository } from './repositories/roles.repository';
 import { AddRoleService } from './services/add-role/add-role.service';
 import { FindRoleByNameService } from './services/find-role-by-name/find-role-by-name.service';
+import { FindUserByRoleService } from './services/find-user-by-role/find-user-by-role.service';
 
 export const imports = [
   TypeOrmModule.forFeature([RoleEntity, RolesRepository, UsersRepository]),
@@ -14,5 +15,6 @@ export const providers = [
   FindRoleByNameService,
   AddRoleService,
   FindUserByIdService,
+  FindUserByRoleService,
 ];
 export const controllers = [RolesController];
