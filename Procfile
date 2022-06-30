@@ -1,1 +1,1 @@
-web: yarn start:prod && yarn typeorm:migration:run
+web: yarn start:prod
