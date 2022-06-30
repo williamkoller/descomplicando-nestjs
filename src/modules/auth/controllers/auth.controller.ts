@@ -9,7 +9,7 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthInputDto } from '@/modules/auth/dtos/auth-input/auth-input.dto';
 import { AuthService } from '@/modules/auth/services/auth.service';
 import { JwtAuthGuard } from '@/modules/auth/guards/auth.guard';
@@ -42,6 +42,7 @@ export class AuthController {
   }
 
   @Get('me')
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
