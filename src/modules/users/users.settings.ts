@@ -13,8 +13,8 @@ import { FindUsersWithPaginationService } from './services/find-users-with-pagin
 import { CalculateOffsetService } from '@/shared/pagination/services/calculate-offset/calculate-offset.service';
 import { BuildPaginationService } from '@/shared/pagination/services/build-pagination/build-pagination.service';
 import { RoleEntity } from '@/infra/typeorm/entities/role-entity/role-entity';
-import { FindUserByRoleService } from '../roles/services/find-user-by-role/find-user-by-role.service';
-import { RolesRepository } from '../roles/repositories/roles.repository';
+import { FindUserByRoleService } from '@/modules/roles/services/find-user-by-role/find-user-by-role.service';
+import { RolesRepository } from '@/modules/roles/repositories/roles.repository';
 
 export const imports = [
   TypeOrmModule.forFeature([
